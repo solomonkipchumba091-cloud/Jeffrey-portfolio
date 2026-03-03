@@ -1,0 +1,26 @@
+AI Photo Editor - API Development using Generative AI
+
+Project description.
+
+It was a long term project, where i handled everything from Development to Deployment.
+
+Technologies used
+1. Generative AI
+2. SD webui Automatic 1111
+3. FASTAPI
+4. GCP Cloud Run
+
+Following APIs were developed
+1. AI Aging (Convert yourself to Older , Young)
+2. Cartoon yourself (Convert your image into Cartoon)
+3. Anime converter (Convert your image into anime)
+4. Background Removing (Remove or Replace background of your image using AI)
+5. Photo Editor (In-paint any part of your photo and then edit it by writing a simple prompt)
+6. AI Photo Enhancer (Enhance your photos using AI)
+Skills and deliverables
+
+FastAPI
+Generative AI
+AI Image Generation
+Google Cloud Platform
+Stable Diffusion

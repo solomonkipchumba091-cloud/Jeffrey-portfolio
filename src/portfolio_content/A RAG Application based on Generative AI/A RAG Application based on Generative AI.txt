@@ -1,0 +1,29 @@
+A RAG Application based on Generative AI
+
+Project description.
+
+A Groundbreaking generative AI tool meticulously crafted to revolutionize your data-driven endeavors
+
+TECH STACK:
+Harnessing the power of sophisticated large language models (LLMs) and LangChain, this tool is engineered to grasp intricate nuances and evolve continuously. With each interaction, it adapts and refines its capabilities, ensuring unparalleled precision in delivering tailored outcomes.
+
+Core Features:
+● Data Training: Empower the tool with your bespoke data for unparalleled insights.
+● LLM ChatBot: Engage in seamless conversations powered by state-of-the-art language models.
+Skills and deliverables
+
+Chatbot Prompt
+Prompt Engineering
+AI Chatbot
+Generative AI
+OpenAI Embeddings
+LLM Prompt Engineering
+LangChain
+AI Bot
+OpenAI API
+Artificial Intelligence
+Chatbot Development
+Chatbot
+Llama 2
+LLaMA
+Desktop Application

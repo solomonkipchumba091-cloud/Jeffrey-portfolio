@@ -1,0 +1,9 @@
+AI-powered Chatbot for Enhanced Customer Support Efficiency | Under NDA
+
+Client: A leading enterprise software company specializing in IT services and customer support.
+
+Background and Problem:
+The client faced challenges in improving the efficiency of their support engineers by streamlining access to real-time client data. Engineers needed to quickly diagnose client instance performance issues (e.g., downtime or slowness). The client sought an innovative solution to reduce troubleshooting times and enhance customer support through automation and real-time insights.
+
+Results:
+Developed an AI chatbot that provides real-time answers to support engineers' queries about client instance performance. Using the Retrieval-Augmented Generation (RAG) approach, the solution enables instant access to critical data, allowing engineers to troubleshoot faster and more effectively. A Knowledge Graph enhances the chatbot's ability to interpret queries and deliver nuanced answers. The chatbot processes complex queries from large datasets in real time, automates data retrieval, and integrates with big data systems for live reporting. The solution handled hundreds of thousands of records daily, increased the number of cases caught by 12%, and accelerated support response times by 40%.

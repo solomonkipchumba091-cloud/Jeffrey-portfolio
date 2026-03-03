@@ -1,0 +1,13 @@
+AI-Powered Asana Task Management & Research Automation
+My role. I designed and implemented this sophisticated, multi-branch intelligent agent workflow.
+
+Project description.
+
+To develop an advanced AI automation workflow that leverages Large Language Models (LLMs) to intelligently manage tasks in Asana, conduct deep research, and communicate findings via Gmail, significantly boosting productivity and streamlining complex information processing.
+Skills and deliverables
+
+Make.com
+Automation
+CRM Automation
+Automated Workflow
+Project Workflows

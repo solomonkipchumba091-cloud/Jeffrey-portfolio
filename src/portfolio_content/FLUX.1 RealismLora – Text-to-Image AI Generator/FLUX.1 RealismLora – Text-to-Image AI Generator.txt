@@ -1,0 +1,15 @@
+FLUX.1 RealismLora – Text-to-Image AI Generator
+
+Project description.
+
+An advanced AI image generator that creates photorealistic visuals from text prompts. The interface allows users to adjust image dimensions, resolution, and noise randomness to get highly customized results.
+
+My Role:
+Integrated and optimized Stable Diffusion with LoRA, configured prompt tuning controls, and ensured efficient backend execution on Hugging Face Spaces.
+Skills and deliverables
+
+Hugging Face
+Diffusion Model
+Gradio
+LoRa
+Python

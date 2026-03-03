@@ -1,0 +1,13 @@
+InsightBot AI-Powered Document Summarisation Chatbot Content Analysis
+My role. Full Stack Developer
+
+Project description.
+
+InsightBot is a sophisticated AI-powered chatbot designed to extract and present information from uploaded documents. Built using FastAPI for the backend, React for the frontend, and LangChain for natural language processing, this project offers a seamless user experience for document analysis.
+Skills and deliverables
+
+Chatbot
+FastAPI
+Python
+LangChain
+React

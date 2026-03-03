@@ -1,97 +1,226 @@
-import React, { useState } from 'react';
+﻿import React, { useMemo, useState } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import { ExternalLink, Github, X, ArrowRight, Layers } from 'lucide-react';
+import { ExternalLink, X, ArrowRight, Layers } from 'lucide-react';
 
-const projectCategories = ['All', 'AI Agents', 'Chatbots', 'LLM/RAG', 'Full-Stack', 'GenAI'];
+type PortfolioProject = {
+  id: string;
+  title: string;
+  role: string;
+  description: string;
+  details: string;
+  tech: string[];
+  category: string;
+  image: string;
+  gallery: string[];
+  link: string | null;
+  color: string;
+};
 
-const projects = [
-  {
-    title: 'AI Customer Support Agent',
-    category: 'Chatbots',
-    image: 'https://images.unsplash.com/photo-1531746790095-e5995f614585?w=600&h=400&fit=crop',
-    description: 'Built an intelligent customer support chatbot handling 10K+ daily conversations with 95% resolution rate.',
-    tech: ['OpenAI', 'LangChain', 'FastAPI', 'React', 'PostgreSQL'],
-    metrics: { conversations: '10K+/day', resolution: '95%', responseTime: '<2s' },
-    color: 'from-blue-500 to-cyan-500',
-  },
-  {
-    title: 'Multi-Agent Workflow System',
-    category: 'AI Agents',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
-    description: 'Autonomous multi-agent system orchestrating complex business workflows with CrewAI and AutoGen.',
-    tech: ['CrewAI', 'AutoGen', 'Python', 'n8n', 'Docker'],
-    metrics: { agents: '12', tasksPerDay: '5K+', efficiency: '+340%' },
-    color: 'from-purple-500 to-pink-500',
-  },
-  {
-    title: 'RAG Knowledge Assistant',
-    category: 'LLM/RAG',
-    image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop',
-    description: 'Enterprise knowledge base with semantic search across 50K+ documents using RAG pipelines.',
-    tech: ['Pinecone', 'OpenAI', 'FastAPI', 'React', 'AWS'],
-    metrics: { documents: '50K+', accuracy: '97%', latency: '<1.5s' },
-    color: 'from-emerald-500 to-teal-500',
-  },
-  {
-    title: 'AI Trading Bot Platform',
-    category: 'Full-Stack',
-    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop',
-    description: 'Real-time AI-powered trading bot with market analysis, automated execution, and risk management.',
-    tech: ['Python', 'React', 'Node.js', 'MongoDB', 'AWS'],
-    metrics: { trades: '1K+/day', uptime: '99.9%', users: '500+' },
-    color: 'from-orange-500 to-amber-500',
-  },
-  {
-    title: 'Voice AI Assistant',
-    category: 'AI Agents',
-    image: 'https://images.unsplash.com/photo-1589254065878-42c014d2df73?w=600&h=400&fit=crop',
-    description: 'Voice-enabled AI assistant with natural conversation flow using Amazon Polly and Deepgram.',
-    tech: ['Amazon Polly', 'Deepgram', 'FastAPI', 'React', 'WebSocket'],
-    metrics: { languages: '8', latency: '<500ms', satisfaction: '4.8/5' },
-    color: 'from-rose-500 to-red-500',
-  },
-  {
-    title: 'AI Image Generation Platform',
-    category: 'GenAI',
-    image: 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=600&h=400&fit=crop',
-    description: 'Custom ComfyUI workflows for brand-specific image generation with LoRA fine-tuned models.',
-    tech: ['ComfyUI', 'Stable Diffusion', 'LoRA', 'Python', 'RunPod'],
-    metrics: { images: '100K+', models: '15', speed: '3s/image' },
-    color: 'from-indigo-500 to-violet-500',
-  },
-  {
-    title: 'SaaS AI Copilot',
-    category: 'LLM/RAG',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop',
-    description: 'AI copilot integrated into a SaaS platform, providing context-aware suggestions and automation.',
-    tech: ['GPT-4', 'LangChain', 'React', 'Node.js', 'Stripe'],
-    metrics: { users: '2K+', productivity: '+60%', retention: '92%' },
-    color: 'from-cyan-500 to-blue-500',
-  },
-  {
-    title: 'WhatsApp AI Bot',
-    category: 'Chatbots',
-    image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&h=400&fit=crop',
-    description: 'Omnichannel AI chatbot deployed on WhatsApp, Telegram, and web with unified conversation management.',
-    tech: ['OpenAI', 'Twilio', 'Flask', 'MongoDB', 'Redis'],
-    metrics: { channels: '3', messages: '50K+/mo', conversion: '+45%' },
-    color: 'from-green-500 to-emerald-500',
-  },
-  {
-    title: 'Data Pipeline Automation',
-    category: 'Full-Stack',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
-    description: 'Large-scale data scraping and processing pipeline with automated ETL and AI-powered analysis.',
-    tech: ['Scrapy', 'Playwright', 'n8n', 'PostgreSQL', 'Docker'],
-    metrics: { records: '10M+', pipelines: '25', uptime: '99.8%' },
-    color: 'from-yellow-500 to-orange-500',
-  },
+type ProjectBucket = {
+  texts: Array<{ path: string; content: string }>;
+  images: Array<{ path: string; url: string }>;
+};
+
+const textFiles = import.meta.glob('../../portfolio_content/**/*.txt', {
+  eager: true,
+  import: 'default',
+  query: '?raw',
+}) as Record<string, string>;
+
+const imageFiles = import.meta.glob('../../portfolio_content/**/*.{png,jpg,jpeg,webp,avif}', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>;
+
+const cardColors = [
+  'from-blue-500 to-cyan-500',
+  'from-purple-500 to-pink-500',
+  'from-emerald-500 to-teal-500',
+  'from-orange-500 to-amber-500',
+  'from-rose-500 to-red-500',
+  'from-indigo-500 to-violet-500',
+  'from-cyan-500 to-blue-500',
+  'from-green-500 to-emerald-500',
+  'from-yellow-500 to-orange-500',
 ];
+
+const categoryRules = [
+  { label: 'Automation', patterns: ['automation', 'n8n', 'workflow', 'make.com'] },
+  { label: 'Chatbots', patterns: ['chatbot', 'assistant', 'support'] },
+  { label: 'LLM/RAG', patterns: ['rag', 'llm', 'langchain', 'openai', 'gpt'] },
+  { label: 'Image AI', patterns: ['image', 'diffusion', 'lora', 'photo', 'vision'] },
+  { label: 'Real Estate', patterns: ['real estate', 'property', 'idx'] },
+  { label: 'SaaS', patterns: ['saas', 'platform'] },
+  { label: 'Data/Analytics', patterns: ['analytics', 'data', 'd3.js', 'machine learning'] },
+  { label: 'Full-Stack', patterns: ['full stack', 'next.js', 'node.js', 'react', 'mern'] },
+];
+
+const normalizePath = (value: string) => value.replace(/\\/g, '/');
+
+const getFolderName = (path: string) => {
+  const normalized = normalizePath(path);
+  const parts = normalized.split('/');
+  const index = parts.indexOf('portfolio_content');
+  return index >= 0 ? (parts[index + 1] || '') : '';
+};
+
+const cleanLeadingMarker = (line: string) =>
+  line
+    .replace(/^[\d]+\.\s*/, '')
+    .replace(/^[\u2022\u25CF\u25AA\u25AB\u25E6\u2043\u2219\u2023\u00B7\-\*]+\s*/, '')
+    .trim();
+
+const compact = (value: string) => value.replace(/\s+/g, ' ').trim();
+
+const toPreview = (value: string, max = 200) => {
+  const text = compact(value);
+  if (text.length <= max) return text;
+  return `${text.slice(0, max - 3).trimEnd()}...`;
+};
+
+const parseContent = (raw: string) => {
+  const lines = raw
+    .replace(/\r/g, '')
+    .split('\n')
+    .map((line) => line.trim());
+
+  const nonEmpty = lines.filter(Boolean);
+  const title = nonEmpty[0] || 'Project';
+
+  const roleLine = nonEmpty.find((line) => line.toLowerCase().startsWith('my role'));
+  const role = roleLine ? compact(roleLine.replace(/^my role\.?/i, '')) : 'Project Delivery';
+
+  const skillsIndex = lines.findIndex((line) => line.toLowerCase().includes('skills and deliverables'));
+  const descriptionIndex = lines.findIndex((line) => line.toLowerCase().includes('project description'));
+
+  const bodyStart = descriptionIndex >= 0 ? descriptionIndex + 1 : (roleLine ? lines.indexOf(roleLine) + 1 : 1);
+  const bodyEnd = skillsIndex >= 0 ? skillsIndex : lines.length;
+
+  const body = lines
+    .slice(bodyStart, bodyEnd)
+    .map(cleanLeadingMarker)
+    .filter(Boolean)
+    .join(' ');
+
+  const skills = (skillsIndex >= 0 ? lines.slice(skillsIndex + 1) : [])
+    .map(cleanLeadingMarker)
+    .filter((line) => line.length > 0 && !line.includes(':'))
+    .slice(0, 6);
+
+  return {
+    title: compact(title.replace(/^[^A-Za-z0-9]+/, '')),
+    role,
+    description: toPreview(body || nonEmpty.slice(1).join(' ')),
+    details: compact(body || nonEmpty.slice(1).join(' ')),
+    skills,
+  };
+};
+
+const extractFirstUrl = (raw: string) => {
+  const match = raw.match(/https?:\/\/[^\s)]+/i);
+  return match ? match[0] : null;
+};
+
+const pickMainText = (texts: Array<{ path: string; content: string }>) => {
+  const sorted = [...texts].sort((a, b) => a.path.localeCompare(b.path));
+  return (
+    sorted.find((entry) => {
+      const fileName = normalizePath(entry.path).split('/').pop()?.toLowerCase() || '';
+      return !fileName.includes('detail') && !fileName.includes('url');
+    }) || sorted[0]
+  );
+};
+
+const pickImages = (images: Array<{ path: string; url: string }>) => {
+  const sorted = [...images].sort((a, b) => {
+    const aName = normalizePath(a.path).split('/').pop()?.toLowerCase() || '';
+    const bName = normalizePath(b.path).split('/').pop()?.toLowerCase() || '';
+    const aRank = aName.startsWith('1.') ? 0 : aName.includes('image_original') ? 1 : 2;
+    const bRank = bName.startsWith('1.') ? 0 : bName.includes('image_original') ? 1 : 2;
+    return aRank - bRank || aName.localeCompare(bName);
+  });
+
+  return {
+    primary: sorted[0]?.url || '',
+    gallery: sorted.map((img) => img.url).slice(0, 9),
+  };
+};
+
+const inferCategory = (project: { title: string; role: string; description: string; skills: string[] }) => {
+  const searchText = `${project.title} ${project.role} ${project.description} ${project.skills.join(' ')}`.toLowerCase();
+  const match = categoryRules.find((rule) => rule.patterns.some((pattern) => searchText.includes(pattern)));
+  return match ? match.label : 'AI Solutions';
+};
+
+const buildPortfolioProjects = (): PortfolioProject[] => {
+  const buckets = new Map<string, ProjectBucket>();
+
+  Object.entries(textFiles).forEach(([path, content]) => {
+    const folder = getFolderName(path);
+    if (!folder) return;
+    if (!buckets.has(folder)) buckets.set(folder, { texts: [], images: [] });
+    buckets.get(folder)!.texts.push({ path, content });
+  });
+
+  Object.entries(imageFiles).forEach(([path, url]) => {
+    const folder = getFolderName(path);
+    if (!folder) return;
+    if (!buckets.has(folder)) buckets.set(folder, { texts: [], images: [] });
+    buckets.get(folder)!.images.push({ path, url });
+  });
+
+  return Array.from(buckets.entries())
+    .map(([folder, bucket], index) => {
+      if (!bucket.texts.length || !bucket.images.length) return null;
+
+      const mainText = pickMainText(bucket.texts);
+      const parsedMain = parseContent(mainText.content);
+
+      const detailsText = bucket.texts.find((entry) => normalizePath(entry.path).toLowerCase().includes('detail'));
+      const parsedDetails = detailsText ? parseContent(detailsText.content) : null;
+
+      const link = bucket.texts
+        .map((entry) => extractFirstUrl(entry.content))
+        .find((value): value is string => Boolean(value)) || null;
+
+      const { primary, gallery } = pickImages(bucket.images);
+      if (!primary) return null;
+
+      const category = inferCategory({
+        title: parsedMain.title,
+        role: parsedMain.role,
+        description: parsedMain.description,
+        skills: parsedMain.skills,
+      });
+
+      return {
+        id: folder,
+        title: parsedMain.title || folder,
+        role: parsedMain.role,
+        description: parsedMain.description,
+        details: parsedDetails?.details || parsedMain.details,
+        tech: parsedMain.skills.length ? parsedMain.skills : ['AI', 'Automation'],
+        category,
+        image: primary,
+        gallery,
+        link,
+        color: cardColors[index % cardColors.length],
+      } as PortfolioProject;
+    })
+    .filter((project): project is PortfolioProject => project !== null)
+    .sort((a, b) => a.title.localeCompare(b.title));
+};
+
+const projects = buildPortfolioProjects();
 
 const ProjectsSection: React.FC = () => {
   const { ref, isVisible } = useScrollReveal();
+  const projectCategories = useMemo(
+    () => ['All', ...Array.from(new Set(projects.map((p) => p.category))).sort((a, b) => a.localeCompare(b))],
+    []
+  );
   const [activeFilter, setActiveFilter] = useState('All');
-  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(null);
   const [showAll, setShowAll] = useState(false);
 
   const filtered = activeFilter === 'All'
@@ -109,13 +238,13 @@ const ProjectsSection: React.FC = () => {
         <div ref={ref} className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-purple-400 text-sm font-medium mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
-            Portfolio
+            Completed Work
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4">
-            Featured <span className="gradient-text">Projects</span>
+            Completed <span className="gradient-text">Projects</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            A selection of production-grade AI systems I've built for businesses worldwide.
+            Real projects I have completed and delivered.
           </p>
         </div>
 
@@ -174,7 +303,7 @@ const ProjectsSection: React.FC = () => {
 
                   {/* Tech tags */}
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.slice(0, 3).map((t) => (
+                    {project.tech.slice(0, 3).map((t: string) => (
                       <span key={t} className="px-2.5 py-1 rounded-md bg-white/5 text-xs text-gray-300 font-medium">
                         {t}
                       </span>
@@ -245,17 +374,11 @@ const ProjectsSection: React.FC = () => {
 
             {/* Modal content */}
             <div className="p-6 sm:p-8">
-              <p className="text-gray-300 leading-relaxed mb-6">{selectedProject.description}</p>
-
-              {/* Metrics */}
-              <div className="grid grid-cols-3 gap-4 mb-6">
-                {Object.entries(selectedProject.metrics).map(([key, value]) => (
-                  <div key={key} className="glass rounded-xl p-4 text-center">
-                    <div className="text-lg font-bold text-white">{value}</div>
-                    <div className="text-xs text-gray-400 capitalize">{key.replace(/([A-Z])/g, ' $1')}</div>
-                  </div>
-                ))}
+              <div className="mb-6">
+                <div className="text-xs text-gray-500 uppercase tracking-wider mb-2">Role</div>
+                <div className="text-sm text-gray-300">{selectedProject.role}</div>
               </div>
+              <p className="text-gray-300 leading-relaxed mb-6">{selectedProject.details}</p>
 
               {/* Tech stack */}
               <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Technologies Used</h4>
@@ -267,21 +390,43 @@ const ProjectsSection: React.FC = () => {
                 ))}
               </div>
 
+              {selectedProject.gallery.length > 1 && (
+                <div className="mb-6">
+                  <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">More Screenshots</h4>
+                  <div className="grid grid-cols-3 gap-2">
+                    {selectedProject.gallery.slice(1, 7).map((image, idx) => (
+                      <img
+                        key={`${selectedProject.id}-gallery-${idx}`}
+                        src={image}
+                        alt={`${selectedProject.title} screenshot ${idx + 2}`}
+                        className="w-full h-20 object-cover rounded-lg border border-white/10"
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Actions */}
               <div className="flex gap-3">
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="flex-1 flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-blue-500/25 transition-all"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  Discuss Similar Project
-                </button>
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="flex items-center justify-center gap-2 px-5 py-3 glass text-white font-medium rounded-xl hover:bg-white/10 transition-all border border-white/10"
-                >
-                  <Github className="w-4 h-4" />
-                </button>
+                {selectedProject.link ? (
+                  <a
+                    href={selectedProject.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex-1 flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    Open Project Link
+                  </a>
+                ) : (
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="flex-1 flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    Close
+                  </button>
+                )}
               </div>
             </div>
           </div>

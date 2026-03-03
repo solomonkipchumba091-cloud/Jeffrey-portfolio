@@ -1,0 +1,22 @@
+AI/ML LLM Chatbots for Support – LangChain, Pinecone, FastAPI
+My role. Full-Stack Developer | AI Chatbot Developer | Automation Developer | Intelligent Systems Engineer
+
+Project description.
+
+We’ve delivered AI/ML-powered LLM chatbots for fintech, SaaS, and retail. These bots resolve routine queries, troubleshoot issues, and integrate with CRMs/ticketing (Zendesk, HubSpot, Intercom).
+
+Key features:
+- RAG-based Q&A (LangChain, LlamaIndex) with Pinecone/FAISS
+- Multi-turn conversations with context memory and personalization
+- Continuous learning via feedback loops and analytics
+- Voice & messaging integrations (Twilio, WhatsApp, Slack)
+- APIs & deployment using FastAPI, Docker, AWS/GCP, Redis, Postgres, CI/CD
+
+Outcome: Clients report 40–60% fewer tickets and measurable growth.
+Skills and deliverables
+
+AI Chatbot
+AI Model Integration
+AI Agent Development
+Python
+JavaScript

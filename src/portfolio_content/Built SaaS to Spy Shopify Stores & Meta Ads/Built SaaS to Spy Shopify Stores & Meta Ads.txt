@@ -1,0 +1,13 @@
+Built SaaS to Spy Shopify Stores & Meta Ads
+My role. Co-Founder & CTO
+
+Project description.
+
+Co-founded and led the technical development of a SaaS platform that tracks Shopify stores globally and scrapes Meta Ad Library data to provide detailed insights into top-performing ads and sales funnels. Integrated SimilarWeb data for comprehensive traffic analysis. Designed and implemented a scalable data pipeline on AWS, enabling daily analytics updates. Successfully grew the platform to CHF 10K MRR by helping e-commerce brands identify and replicate winning strategies.
+Skills and deliverables
+
+SaaS
+Web Scraping
+AWS Fargate
+Python
+Next.js

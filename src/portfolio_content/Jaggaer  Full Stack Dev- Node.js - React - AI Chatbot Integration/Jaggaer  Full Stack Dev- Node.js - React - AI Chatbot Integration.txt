@@ -1,0 +1,13 @@
+Jaggaer | Full Stack Dev- Node.js - React - AI Chatbot Integration
+My role. Full Stack Developer | AI Integration Specialist | Node.js | React | MERN
+
+Project description.
+
+Jaggaer is a leading provider of AI-driven procurement solutions, offering a comprehensive Source-to-Pay (S2P) platform designed to optimize and automate procurement processes. Trusted by Fortune 500 companies, Jaggaer enhances supplier management, strategic sourcing, and spend analytics through advanced machine learning, automation, and predictive analytics. Improve procurement efficiency, reduce operational costs, and ensure compliance with Jaggaer's innovative solutions that empower data-driven decisions for sustainable business growth.
+Skills and deliverables
+
+Artificial Intelligence
+Full-Stack Development
+AI Chatbot
+Node.js
+React

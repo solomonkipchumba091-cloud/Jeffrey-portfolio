@@ -1,0 +1,3 @@
+https://www.akkio.com/
+
+As part of the project, I implemented a responsive frontend in Next.js with a built-in drag-and-drop interface for connecting data sources, training models, and making predictions. To visualize data, I integrated D3.js - graphs, charts, and analytical components. On the backend, he created a REST API for managing sessions, models, and predictions, and implemented integration with the OpenAI API to explain the results. Firebase was used for authorization, storing user settings, and real-time updates.

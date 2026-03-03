@@ -1,0 +1,13 @@
+AI Automation n8n
+My role. AI Automation
+
+Project description.
+
+We built an automated web scraping workflow that extracts data from a website, processes it, and exports the results to both Google Sheets and Microsoft Excel, while also sending the data as a CSV via email. The flow begins by fetching HTML content from a target website, parsing book data and prices, sorting by price, and converting the results into a structured CSV file. The pipeline integrates with Microsoft Excel 365 using Graph API credentials and with Google Sheets and Gmail using Google Cloud APIs. Key automation steps include HTML parsing, sorting, and multi-platform data export.
+Skills and deliverables
+
+ML Automation
+n8n
+Make.com
+Data Scraping
+AI Agent Development

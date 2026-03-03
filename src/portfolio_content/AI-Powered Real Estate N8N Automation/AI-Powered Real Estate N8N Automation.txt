@@ -1,0 +1,25 @@
+AI-Powered Real Estate N8N Automation
+
+Project description.
+
+▪️ Client: Real Estate Agency (US-based)
+▪️Duration: 2 weeks
+▪️Budget: $8,500
+▪️Industry: Real Estate
+
+🔵 Challenge
+▪️Manual lead generation consuming 20+ hours weekly
+▪️Inconsistent lead quality and follow-up processes
+▪️No centralized system for lead tracking and nurturing
+▪️Missing 60% of potential leads due to manual processes
+🔵 Solution Delivered
+▪️Lead Qualification Bot: GPT-4 powered chatbot for initial lead screening
+▪️CRM Integration: Seamless HubSpot ▪️integration with automated lead scoring
+Multi-Channel Communication: WhatsApp, SMS, and email automation workflow
+Skills and deliverables
+
+Python
+OpenAI API
+Twilio API
+n8n
+Airtable

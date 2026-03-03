@@ -1,0 +1,11 @@
+AI Legal Assistant for Document Analysis & Retrieval
+
+Project description.
+
+Developed an AI-powered legal assistant designed to handle user queries related to legal matters. The system processes input legal questions from users and provides automated, contextually relevant legal responses. Leveraging natural language processing and legal knowledge databases, the robo lawyer aims to offer accurate and helpful legal information, improving accessibility and efficiency for users seeking preliminary legal advice.
+Skills and deliverables
+
+AI Development
+Vector Database
+Machine Learning
+NLP Tokenization

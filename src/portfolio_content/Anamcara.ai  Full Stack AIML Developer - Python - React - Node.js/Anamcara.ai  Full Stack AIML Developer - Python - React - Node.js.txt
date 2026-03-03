@@ -1,0 +1,13 @@
+Anamcara.ai | Full Stack AI/ML Developer - Python - React - Node.js
+My role. Full Stack Developer | Python - Node.js - React - PostgreSQL - Next.js
+
+Project description.
+
+Anamcara.ai is a cutting-edge AI-driven platform revolutionizing digital interactions. By leveraging advanced machine learning and natural language processing, Anamcara.ai delivers personalized, real-time communication solutions. Ideal for businesses seeking to enhance customer engagement, streamline operations, and drive growth, Anamcara.ai offers scalable, intelligent systems that adapt to diverse needs. Experience the future of AI with Anamcara.ai.
+Skills and deliverables
+
+Artificial Intelligence
+PostgreSQL
+React
+Node.js
+AI Chatbot

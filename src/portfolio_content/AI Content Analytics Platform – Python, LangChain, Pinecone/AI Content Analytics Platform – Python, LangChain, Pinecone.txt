@@ -1,0 +1,20 @@
+AI Content Analytics Platform – Python, LangChain, Pinecone
+My role. Full-Stack Developer | AI Chatbot Developer | Automation Developer | Intelligent Systems Engineer
+
+Project description.
+
+We modernized a media company’s editorial analytics engine using AI/ML-powered LLMs to replace legacy ML, improving article assessment for tone, keywords, and gender representation.
+
+Key features:
+- Automated tagging & RAG-powered keyword & sentiment analysis (LangChain, LlamaIndex, Pinecone)
+- Gender balance detection across content and quotes
+- Exportable reports via FastAPI, Python, Postgres, Docker, CI/CD
+
+Outcome: Company gained deep editorial visibility and runs automated weekly audits, ensuring content aligns with internal equality standards and partnerships.
+Skills and deliverables
+
+ChatGPT
+Python
+AI Model Integration
+AI Content Writing
+AI Data Analytics

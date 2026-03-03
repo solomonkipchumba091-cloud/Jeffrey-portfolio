@@ -1,0 +1,13 @@
+AI Travel Chatbot | Agentic LLMs | Python
+My role. ML Engineer
+
+Project description.
+
+AI chatbot virtual assistance for travel mobile app.
+Skills and deliverables
+
+Deep Learning
+Natural Language Processing
+Artificial Intelligence
+Google Cloud Platform
+NumPy

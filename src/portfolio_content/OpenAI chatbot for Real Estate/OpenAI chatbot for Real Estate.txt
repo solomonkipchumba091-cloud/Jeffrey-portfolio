@@ -1,0 +1,14 @@
+OpenAI chatbot for Real Estate
+My role. Chatbot Developer
+
+Project description.
+
+Hobbes is a property management AI assistant that helps answer questions from potential tenants. Hobbes is the very first touch point for the prospects, that welcomes users on the website and tells them more about the property. Hobbes keeps the user engaged, allowing them to ask very specific questions and answering in a personalised way. Hobbes can display available apartments, schedule tours and provide information on rent, fees, policies and more.
+
+Built using OpenAI, RAG, Python and FastAPI
+Skills and deliverables
+
+OpenAI API
+Retrieval Augmented Generation
+Python
+FastAPI

@@ -1,0 +1,17 @@
+Skymallify e-Commerce Store (Figma to React-Next.js, Node-Nest.js)
+My role. MERN Stack Dev
+
+Project description.
+
+Skymallify is a cutting-edge store management system designed with Next.js 15, TypeScript, Shadcn, Recharts, and React Simple Maps.
+
+It offers sleek UI, dark and light modes, and an intuitive Shadcn sidebar for easy navigation. Skymallify delivers rich insights with custom charts and geographical visualizations, all while being fully mobile-responsive.
+
+Key features include a Dashboard, Leaderboard, Orders, Products, Sales Report, Messages, and Settings. Elevate your store management experience with Skymallify’s modern design and powerful functionality.
+Skills and deliverables
+
+Next.js
+React
+OpenAI API
+Chart.js
+Supabase

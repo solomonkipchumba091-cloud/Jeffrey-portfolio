@@ -1,0 +1,13 @@
+Real Estate Analysis Application
+My role. Web Developer
+
+Project description.
+
+This project dynamically filters property details based on selected criteria, delivering tailored results sourced from third-party MLS IDX APIs. Additionally, it features an advanced analysis module that ranks properties and calculates a property score using a sophisticated algorithm, ensuring actionable insights.
+Skills and deliverables
+
+Python
+Real Estate IDX
+Streamlit
+Real Estate
+Matplotlib

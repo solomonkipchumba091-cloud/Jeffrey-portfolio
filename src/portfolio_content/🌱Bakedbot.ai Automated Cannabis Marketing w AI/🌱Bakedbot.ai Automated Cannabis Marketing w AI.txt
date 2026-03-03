@@ -1,0 +1,25 @@
+🌱Bakedbot.ai: Automated Cannabis Marketing w/ AI
+My role. AI Engineer | Agent Developer | Langchain Expert
+
+Project description.
+
+Developed an AI Agent for automating content creation (SMS, emails, articles) for cannabis marketing, based on user data. Integrated Twilio API for communication.
+
+🔑 Features:
+
+🔹 Data Analyst: Analyzes transaction data for personalized content.
+🔹 SMS Creator: Crafts engaging, tailored SMS.
+🔹Email Composer: Generates professional, targeted emails.
+🔹QA Agent: Ensures content is clear and error-free.
+🔹 Article Writer: Creates marketing articles based on customer data.
+
+🛠 Tech Stack: Python, CrewAI, GPT-4, LangChain, Heroku, Git, Twilio API
+
+Built for Bakedbot.ai.
+Skills and deliverables
+
+Natural Language Processing
+AI Agent Development
+LangChain
+Machine Learning
+Chatbot

@@ -1,0 +1,13 @@
+🟢 Akkio (Next.js / Node.js / Firebase / D3.js / OpenAI API)
+My role. Full-Stack Developer
+
+Project description.
+
+Akkio is a no-code platform for building AI solutions that allows users to build, run, and visualize machine learning models directly from Excel, HubSpot, BigQuery, and other sources.
+Skills and deliverables
+
+Next.js
+Node.js
+Firebase
+D3.js
+OpenAI API

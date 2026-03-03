@@ -1,0 +1,11 @@
+Rossmann Sale Navigator: AI Sales Q&A & Data Extraction
+
+Project description.
+
+This project focuses on predicting Rossmann store sales using machine learning models like Linear Regression, Random Forest, and Decision Tree. It involves building a comprehensive ML pipeline, including data preprocessing steps like outlier removal and handling null values. I conduct univariate analysis to explore data distribution and examine correlations. Finally, I develop and evaluate multiple models to predict sales, comparing their performance to identify the best approach.
+Skills and deliverables
+
+Data Processing
+Machine Learning
+AI Model Training
+Feature Extraction

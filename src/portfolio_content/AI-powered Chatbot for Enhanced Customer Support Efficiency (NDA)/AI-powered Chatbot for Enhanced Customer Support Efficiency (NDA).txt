@@ -1,0 +1,17 @@
+AI-powered Chatbot for Enhanced Customer Support Efficiency (NDA)
+My role. AI Developer
+
+Project description.
+
+𝐂𝐨𝐫𝐞 𝐀𝐈: RAG, Knowledge Graph, NLP
+
+𝐓𝐞𝐜𝐡𝐧𝐨𝐥𝐨𝐠𝐢𝐞𝐬: Python, Big Data Integration, Cloud Storage
+
+An AI chatbot for real-time client instance diagnostics, reducing troubleshooting time by 40% and improving case resolution by 12%. Enhances customer support with automated insights and live reporting.
+Skills and deliverables
+
+Retrieval Augmented Generation
+Natural Language Processing
+Machine Learning
+Chatbot Development
+PyTorch

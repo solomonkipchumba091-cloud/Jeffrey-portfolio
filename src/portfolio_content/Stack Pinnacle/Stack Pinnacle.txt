@@ -1,0 +1,12 @@
+Stack Pinnacle
+
+Project description.
+
+Designed a highly detailed and user-friendly dashboard that provides real-time insights into key metrics such as client performance, project status, resource allocation, and financial health. Integrated features like customizable reports, interactive charts, and automated alerts, allowing managers to make data-driven decisions quickly. The dashboard also includes role-based access, enabling different team members to access relevant data tailored to their needs, all while ensuring a smooth and intuitive user experience.
+Skills and deliverables
+
+AI Platform
+LLM Prompt
+JavaScript
+React
+Next.js
