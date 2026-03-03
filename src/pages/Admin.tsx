@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
-import { ArrowLeft, RefreshCw, ArrowUpDown, Mail, Clock, CheckCircle, Eye, ChevronDown, X, Terminal } from 'lucide-react';
+import { ArrowLeft, RefreshCw, ArrowUpDown, Mail, Clock, CheckCircle, Eye, ChevronDown, X, Terminal, User, Lock, LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface Submission {
@@ -23,6 +23,9 @@ const statusConfig = {
   responded: { label: 'Responded', color: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30', icon: CheckCircle },
 };
 
+const ADMIN_USERNAME = 'admin';
+const ADMIN_PASSWORD = '123qwe!@#QWE';
+
 const Admin: React.FC = () => {
   const navigate = useNavigate();
   const [submissions, setSubmissions] = useState<Submission[]>([]);
@@ -32,6 +35,13 @@ const Admin: React.FC = () => {
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [selectedSubmission, setSelectedSubmission] = useState<Submission | null>(null);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [authError, setAuthError] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return window.sessionStorage.getItem('admin_auth') === 'true';
+  });
 
   const fetchSubmissions = async () => {
     setLoading(true);
@@ -47,8 +57,31 @@ const Admin: React.FC = () => {
   };
 
   useEffect(() => {
+    if (!isAuthenticated) return;
     fetchSubmissions();
-  }, []);
+  }, [isAuthenticated]);
+
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+      window.sessionStorage.setItem('admin_auth', 'true');
+      setAuthError('');
+      setPassword('');
+      return;
+    }
+    setAuthError('Invalid username or password.');
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    window.sessionStorage.removeItem('admin_auth');
+    setUsername('');
+    setPassword('');
+    setSubmissions([]);
+    setSelectedSubmission(null);
+    setAuthError('');
+  };
 
   const updateStatus = async (id: string, newStatus: string) => {
     setUpdatingId(id);
@@ -106,6 +139,71 @@ const Admin: React.FC = () => {
     </button>
   );
 
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-[hsl(220,20%,4%)] text-white flex items-center justify-center p-4">
+        <div className="w-full max-w-md glass-strong rounded-2xl border border-white/10 p-6 sm:p-8">
+          <button onClick={() => navigate('/')} className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors mb-6">
+            <ArrowLeft className="w-4 h-4" />
+            Back to Portfolio
+          </button>
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+              <Terminal className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold">Admin Login</h1>
+              <p className="text-sm text-gray-400">Sign in to view submissions</p>
+            </div>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-4">
+            <label className="block">
+              <span className="text-xs text-gray-400 uppercase tracking-wider">Username</span>
+              <div className="mt-1.5 flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3">
+                <User className="w-4 h-4 text-gray-500" />
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="w-full bg-transparent py-2.5 text-sm outline-none"
+                  autoComplete="username"
+                  required
+                />
+              </div>
+            </label>
+
+            <label className="block">
+              <span className="text-xs text-gray-400 uppercase tracking-wider">Password</span>
+              <div className="mt-1.5 flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3">
+                <Lock className="w-4 h-4 text-gray-500" />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full bg-transparent py-2.5 text-sm outline-none"
+                  autoComplete="current-password"
+                  required
+                />
+              </div>
+            </label>
+
+            {authError && (
+              <p className="text-sm text-red-400">{authError}</p>
+            )}
+
+            <button
+              type="submit"
+              className="w-full py-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+            >
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[hsl(220,20%,4%)] text-white">
       {/* Header */}
@@ -124,10 +222,16 @@ const Admin: React.FC = () => {
               <h1 className="text-lg font-bold">Admin Dashboard</h1>
             </div>
           </div>
-          <button onClick={fetchSubmissions} className="flex items-center gap-2 px-4 py-2 glass rounded-lg text-sm text-gray-400 hover:text-white transition-colors border border-white/10">
-            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-            Refresh
-          </button>
+          <div className="flex items-center gap-2">
+            <button onClick={fetchSubmissions} className="flex items-center gap-2 px-4 py-2 glass rounded-lg text-sm text-gray-400 hover:text-white transition-colors border border-white/10">
+              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+              Refresh
+            </button>
+            <button onClick={handleLogout} className="flex items-center gap-2 px-4 py-2 glass rounded-lg text-sm text-gray-400 hover:text-white transition-colors border border-white/10">
+              <LogOut className="w-4 h-4" />
+              Logout
+            </button>
+          </div>
         </div>
       </header>
 
